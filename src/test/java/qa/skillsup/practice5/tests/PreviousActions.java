@@ -13,7 +13,7 @@ public class PreviousActions /*extends TestCase*/{
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @After

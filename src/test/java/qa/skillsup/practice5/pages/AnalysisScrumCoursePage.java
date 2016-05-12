@@ -8,46 +8,42 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AnalysisJavaCoursePage {
+public class AnalysisScrumCoursePage extends AnalysisJavaCoursePage{
+
     private WebDriver driver;
-    protected String baseUrl = "http://skillsup.ua";
-    protected By moveToEducation = By.xpath("//div[@class='menuChapterInside']/a[1]");
-    protected By moveToCourses = By.xpath("//a[@href='http://skillsup.ua/training/courses.aspx']");
-    private By jumpToJavaPage = By.xpath("//a[@href='http://skillsup.ua/training/courses/diving-into-java.aspx']");
-    protected By courseName = By.className("greenHeader");
-    protected By coachName = By.className("name");
-    protected By submitRequestButton = By.className("button");
-    protected By alertContent = By.className("header");
+    private By jumpToScrumPage = By.xpath("//a[@href='http://skillsup.ua/training/courses/diving-into-scrum.aspx']");
 
 
-
-    public AnalysisJavaCoursePage(WebDriver driver) {
+    public AnalysisScrumCoursePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         driver.get(baseUrl);
         PageFactory.initElements(driver, this);
     }
 
-    public void jumpToCoursePage(){
+    public void jumpToCoursePage() {
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(moveToEducation)).build().perform();
         action.moveToElement(driver.findElement(moveToCourses)).build().perform();
-        action.click(driver.findElement(jumpToJavaPage)).build().perform();
+        action.click(driver.findElement(jumpToScrumPage)).build().perform();
     }
-    public String getTextAboutCourseName(){
+
+    public String getTextAboutCourseName() {
         WebElement element = driver.findElement(courseName);
         return element.getText();
     }
-    public String getTextAboutCoachName(String nameCoach){
+
+    public String getTextAboutCoachName(String nameCoach) {
         List<WebElement> elements = driver.findElements(coachName);
-        String nameOfCouch = null;
-            for (WebElement element : elements){
-            if (nameCoach.equals(element.getText())){
+        String nameOfCoach = null;
+        for (WebElement element : elements) {
+            if (nameCoach.equals(element.getText())) {
                 System.out.println(nameCoach + " present on this page");
-                nameOfCouch = element.getText();
+                nameOfCoach = element.getText();
                 break;
             }
         }
-        return nameOfCouch;
+        return nameOfCoach;
     }
     public boolean isPopUpPresent(){
         return driver.findElement(submitRequestButton).isDisplayed();
@@ -66,6 +62,4 @@ public class AnalysisJavaCoursePage {
         }
         return fieldName;
     }
-
-
 }

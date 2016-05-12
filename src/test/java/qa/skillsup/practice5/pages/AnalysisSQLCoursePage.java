@@ -8,24 +8,18 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AnalysisSQLCoursePage {
+public class AnalysisSQLCoursePage extends AnalysisJavaCoursePage{
     private WebDriver driver;
-    private String baseUrl = "http://skillsup.ua";
-    private By moveToEducation = By.xpath("//div[@class='menuChapterInside']/a[1]");
-    private By moveToCourses = By.xpath("//a[@href='http://skillsup.ua/training/courses.aspx']");
     private By jumpToSQLPage = By.xpath("//a[@href='http://skillsup.ua/training/courses/sql-fundamentals.aspx']");
-    private By courseName = By.className("greenHeader");
-    private By coachName = By.className("name");
-    private By submitRequestButton = By.className("button");
-    private By alertContent = By.className("header");
 
     public AnalysisSQLCoursePage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         driver.get(baseUrl);
         PageFactory.initElements(driver, this);
     }
 
-    public void jumpToSQLCoursePage() {
+    public void jumpToCoursePage() {
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(moveToEducation)).build().perform();
         action.moveToElement(driver.findElement(moveToCourses)).build().perform();
@@ -34,8 +28,6 @@ public class AnalysisSQLCoursePage {
 
     public String getTextAboutCourseName() {
         WebElement element = driver.findElement(courseName);
-        /*WebDriverWait webDriverWait = new WebDriverWait(driver,50);
-        webDriverWait.until(ExpectedConditions.textToBe(courseName, "SQL Fundamentals "));*/
         return element.getText();
     }
 
@@ -50,6 +42,9 @@ public class AnalysisSQLCoursePage {
             }
         }
         return nameOfCoach;
+    }
+    public boolean isPopUpPresent(){
+        return driver.findElement(submitRequestButton).isDisplayed();
     }
     public  String clickRequestButton(String value){
         Actions action = new Actions(driver);

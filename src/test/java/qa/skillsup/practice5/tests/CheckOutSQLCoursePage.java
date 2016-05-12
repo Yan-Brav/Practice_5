@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.NotFoundException;
 import qa.skillsup.practice5.pages.AnalysisSQLCoursePage;
 
+import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 public class CheckOutSQLCoursePage extends PreviousActions{
@@ -12,7 +13,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
     @Test
         public void checkOutSQLPage(){
             pageSQL = new AnalysisSQLCoursePage(driver);
-            pageSQL.jumpToSQLCoursePage();
+            pageSQL.jumpToCoursePage();
             String courseName = "SQL Fundamentals";
 
             assertEquals("This page doesn't contain SQL course", courseName, pageSQL.getTextAboutCourseName());
@@ -21,7 +22,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
         public void checkOutCoachAlPedFromSQLPage(){
             String coachAlPed = "Алексей Педоренко";
             pageSQL = new AnalysisSQLCoursePage(driver);
-            pageSQL.jumpToSQLCoursePage();
+            pageSQL.jumpToCoursePage();
 
             assertEquals("This couch doesn't present on this page", coachAlPed, pageSQL.getTextAboutCoachName(coachAlPed));
     }
@@ -29,7 +30,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
         public void checkOutCoachDenSkalFromSQLPage(){
             String coachDenSkal = "Денис Скаленко";
             pageSQL = new AnalysisSQLCoursePage(driver);
-            pageSQL.jumpToSQLCoursePage();
+            pageSQL.jumpToCoursePage();
 
             assertEquals("This couch doesn't present on this page", coachDenSkal, pageSQL.getTextAboutCoachName(coachDenSkal));
     }
@@ -37,15 +38,25 @@ public class CheckOutSQLCoursePage extends PreviousActions{
         public void checkOutCouchLinOlFromSQLPage(){
             String couchLinOl = "Лина Олейник";
             pageSQL = new AnalysisSQLCoursePage(driver);
-            pageSQL.jumpToSQLCoursePage();
+            pageSQL.jumpToCoursePage();
 
             assertEquals("This couch doesn't present on this page", couchLinOl, pageSQL.getTextAboutCoachName(couchLinOl));
+    }
+    @Test
+    public void popUpIsPresent()throws NotFoundException {
+        pageSQL = new AnalysisSQLCoursePage(driver);
+        pageSQL.jumpToCoursePage();
+        try {
+            assertTrue("PopUp is invisible",pageSQL.isPopUpPresent());
+        } catch (NotFoundException ex) {
+            System.out.println("PopUp is absent");
+        }
     }
     @Test
         public void checkOutPopUpFieldsByName()throws NotFoundException {
             String nameOfField = "Имя";
             pageSQL = new AnalysisSQLCoursePage(driver);
-            pageSQL.jumpToSQLCoursePage();
+            pageSQL.jumpToCoursePage();
 
             try {
                 assertEquals("The field with this name wasn't found", nameOfField, pageSQL.clickRequestButton(nameOfField));
@@ -57,7 +68,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
     public void checkOutPopUpFieldsBySurName()throws NotFoundException{
         String nameOfField = "Фамилия";
         pageSQL = new AnalysisSQLCoursePage(driver);
-        pageSQL.jumpToSQLCoursePage();
+        pageSQL.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, pageSQL.clickRequestButton(nameOfField));
@@ -69,7 +80,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
     public void checkOutPopUpFieldsByEmail()throws NotFoundException{
         String nameOfField = "Электронная почта";
         pageSQL = new AnalysisSQLCoursePage(driver);
-        pageSQL.jumpToSQLCoursePage();
+        pageSQL.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, pageSQL.clickRequestButton(nameOfField));
@@ -81,7 +92,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
     public void checkOutPopUpFieldsByPhoneNumber()throws NotFoundException{
         String nameOfField = "Телефон";
         pageSQL = new AnalysisSQLCoursePage(driver);
-        pageSQL.jumpToSQLCoursePage();
+        pageSQL.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, pageSQL.clickRequestButton(nameOfField));

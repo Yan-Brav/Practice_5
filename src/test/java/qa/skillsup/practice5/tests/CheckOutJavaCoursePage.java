@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.NotFoundException;
 import qa.skillsup.practice5.pages.AnalysisJavaCoursePage;
 
+import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 public class CheckOutJavaCoursePage extends PreviousActions{
@@ -12,7 +13,7 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     @Test
     public void checkOutJavaPage(){
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
         String courseName = "Diving into Java (Погружение в Java)";
 
         assertEquals("This page doesn't contain Java course", courseName, page.getTextAboutCourseName());
@@ -21,7 +22,7 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     public void checkOutCouchAlGalFromJavaPage(){
         String couchAlGal = "Александр Галковский";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         assertEquals("This couch doesn't present on this page", couchAlGal, page.getTextAboutCoachName(couchAlGal));
     }
@@ -29,7 +30,7 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     public void checkOutCouchAlPedFromJavaPage(){
         String couchAlPed = "Алексей Педоренко";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         assertEquals("This couch doesn't present on this page", couchAlPed, page.getTextAboutCoachName(couchAlPed));
     }
@@ -37,15 +38,25 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     public void checkOutCouchDenSkalFromJavaPage(){
         String couchDenSkal = "Денис Скаленко";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         assertEquals("This couch doesn't present on this page", couchDenSkal, page.getTextAboutCoachName(couchDenSkal));
+    }
+    @Test
+    public void popUpIsPresent()throws NotFoundException {
+        page = new AnalysisJavaCoursePage(driver);
+        page.jumpToCoursePage();
+        try {
+            assertTrue("PopUP is invisible",page.isPopUpPresent());
+        } catch (NotFoundException ex) {
+            System.out.println("PopUP is absent");
+        }
     }
     @Test
     public void checkOutPopUpFieldsByName()throws NotFoundException{
         String nameOfField = "Имя";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, page.clickRequestButton(nameOfField));
@@ -57,7 +68,7 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     public void checkOutPopUpFieldsBySurName()throws NotFoundException{
         String nameOfField = "Фамилия";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, page.clickRequestButton(nameOfField));
@@ -69,7 +80,7 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     public void checkOutPopUpFieldsByEmail()throws NotFoundException{
         String nameOfField = "Электронная почта";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, page.clickRequestButton(nameOfField));
@@ -81,7 +92,7 @@ public class CheckOutJavaCoursePage extends PreviousActions{
     public void checkOutPopUpFieldsByPhoneNumber()throws NotFoundException{
         String nameOfField = "Телефон";
         page = new AnalysisJavaCoursePage(driver);
-        page.jumpToJavaCoursePage();
+        page.jumpToCoursePage();
 
         try {
             assertEquals("The field with this name wasn't found", nameOfField, page.clickRequestButton(nameOfField));
