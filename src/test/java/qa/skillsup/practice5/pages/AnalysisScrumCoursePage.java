@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnalysisScrumCoursePage extends AnalysisJavaCoursePage{
@@ -61,5 +62,13 @@ public class AnalysisScrumCoursePage extends AnalysisJavaCoursePage{
             }
         }
         return fieldName;
+    }
+    public List<String> getCoachesNames(){
+        List<WebElement> elements = driver.findElements(namesOfCoaches);
+        List<String> names = new ArrayList<String>();
+        for (WebElement element : elements){
+            names.add(element.getText());
+        }
+        return names;
     }
 }

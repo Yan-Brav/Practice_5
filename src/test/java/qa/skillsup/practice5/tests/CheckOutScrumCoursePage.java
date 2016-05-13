@@ -24,7 +24,7 @@ public class CheckOutScrumCoursePage extends PreviousActions {
         pageScrum = new AnalysisScrumCoursePage(driver);
         pageScrum.jumpToCoursePage();
 
-        assertEquals("This couch doesn't present on this page", couchMarMel, pageScrum.getTextAboutCoachName(couchMarMel));
+        assertEquals("This coach doesn't present on this page", couchMarMel, pageScrum.getTextAboutCoachName(couchMarMel));
     }
     @Test
     public void checkOutCouchOlSimFromScrumPage(){
@@ -32,7 +32,7 @@ public class CheckOutScrumCoursePage extends PreviousActions {
         pageScrum = new AnalysisScrumCoursePage(driver);
         pageScrum.jumpToCoursePage();
 
-        assertEquals("This couch doesn't present on this page", couchOlSim, pageScrum.getTextAboutCoachName(couchOlSim));
+        assertEquals("This coach doesn't present on this page", couchOlSim, pageScrum.getTextAboutCoachName(couchOlSim));
     }
     @Test
     public void popUpIsPresent()throws NotFoundException {
@@ -92,4 +92,16 @@ public class CheckOutScrumCoursePage extends PreviousActions {
             ex.printStackTrace();
         }
     }
+    //It is alternative instead of test-methods checkOutCouchMarMelFromScrumPage() and checkOutCouchOlSimFromScrumPage()
+    //It is more automated test-method
+    //But if at least one assert was failed, execution will be stopped
+    @Test
+    public void checkOutCouchesFromScrumPage(){
+        pageScrum = new AnalysisScrumCoursePage(driver);
+        pageScrum.jumpToCoursePage();
+        for (String name : pageScrum.getCoachesNames()){
+            assertEquals(name + " isn't coach for Scrum", name, pageScrum.getTextAboutCoachName(name));
+        }
+    }
+
 }

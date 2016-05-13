@@ -24,7 +24,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
             pageSQL = new AnalysisSQLCoursePage(driver);
             pageSQL.jumpToCoursePage();
 
-            assertEquals("This couch doesn't present on this page", coachAlPed, pageSQL.getTextAboutCoachName(coachAlPed));
+            assertEquals("This coach doesn't present on this page", coachAlPed, pageSQL.getTextAboutCoachName(coachAlPed));
     }
     @Test
         public void checkOutCoachDenSkalFromSQLPage(){
@@ -32,7 +32,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
             pageSQL = new AnalysisSQLCoursePage(driver);
             pageSQL.jumpToCoursePage();
 
-            assertEquals("This couch doesn't present on this page", coachDenSkal, pageSQL.getTextAboutCoachName(coachDenSkal));
+            assertEquals("This coach doesn't present on this page", coachDenSkal, pageSQL.getTextAboutCoachName(coachDenSkal));
     }
     @Test
         public void checkOutCouchLinOlFromSQLPage(){
@@ -40,7 +40,7 @@ public class CheckOutSQLCoursePage extends PreviousActions{
             pageSQL = new AnalysisSQLCoursePage(driver);
             pageSQL.jumpToCoursePage();
 
-            assertEquals("This couch doesn't present on this page", couchLinOl, pageSQL.getTextAboutCoachName(couchLinOl));
+            assertEquals("This coach doesn't present on this page", couchLinOl, pageSQL.getTextAboutCoachName(couchLinOl));
     }
     @Test
     public void popUpIsPresent()throws NotFoundException {
@@ -98,6 +98,17 @@ public class CheckOutSQLCoursePage extends PreviousActions{
             assertEquals("The field with this name wasn't found", nameOfField, pageSQL.clickRequestButton(nameOfField));
         }catch (NotFoundException ex){
             ex.printStackTrace();
+        }
+    }
+    //It is alternative instead of test-methods checkOutCouchMarMelFromScrumPage() and checkOutCouchOlSimFromScrumPage()
+    //It is more automated test-method
+    //But if at least one assert was failed, execution will be stopped
+    @Test
+    public void checkOutCouchesFromScrumPage(){
+        pageSQL = new AnalysisSQLCoursePage(driver);
+        pageSQL.jumpToCoursePage();
+        for (String name : pageSQL.getCoachesNames()){
+            assertEquals(name + " isn't coach for SQL", name, pageSQL.getTextAboutCoachName(name));
         }
     }
 }

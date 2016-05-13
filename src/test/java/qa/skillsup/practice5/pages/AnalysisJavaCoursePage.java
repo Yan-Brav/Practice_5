@@ -5,7 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnalysisJavaCoursePage {
@@ -18,6 +21,8 @@ public class AnalysisJavaCoursePage {
     protected By coachName = By.className("name");
     protected By submitRequestButton = By.className("button");
     protected By alertContent = By.className("header");
+    protected By popUpFieldsContent = By.xpath("//div[@class='field fieldlong']");
+    protected By namesOfCoaches = By.xpath("//span[@class='name']");
 
 
 
@@ -55,6 +60,8 @@ public class AnalysisJavaCoursePage {
     public  String clickRequestButton(String value){
         Actions action = new Actions(driver);
         action.click(driver.findElement(submitRequestButton)).build().perform();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.alertIsPresent());
         String windowId = driver.getWindowHandle();
         String fieldName = null;
         List<WebElement> elements = driver.switchTo().window(windowId).findElements(alertContent);
@@ -66,6 +73,22 @@ public class AnalysisJavaCoursePage {
         }
         return fieldName;
     }
-
+    public List<String> getCoachesNames(){
+        List<WebElement> elements = driver.findElements(namesOfCoaches);
+        List<String> names = new ArrayList<String>();
+        for (WebElement element : elements){
+            names.add(element.getText());
+        }
+        return names;
+    }
+    public List<String> getFieldsFromPopUp(){
+        List<WebElement> elements = driver.findElements(popUpFieldsContent);
+        List<String> fieldsPopUp = new ArrayList<String>();
+        for (WebElement element : elements){
+            System.out.println(element.getText());
+            fieldsPopUp.add(element.getText());
+        }
+        return fieldsPopUp;
+    }
 
 }
